@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _lifeTime = 5f;
     [SerializeField] private float _speed = 10f;
+    [SerializeField] private float _damage = 20f;
     [SerializeField] private Rigidbody _rb;
 
     IEnumerator Start()
@@ -28,6 +29,14 @@ public class Bullet : MonoBehaviour
         {
             return;
         }
+
+        var character = other.GetComponent<Character>();
+
+        if (character != null)
+        {
+            character.GetDamage(_damage);
+        }
+
         Destroy(gameObject);
     }
 
