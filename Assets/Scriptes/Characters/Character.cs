@@ -12,6 +12,7 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField] protected CharacterMover _mover;
     [SerializeField] protected CharacterScanner _scanner;
+    [SerializeField] protected CharacterInventory _inventory;
 
     protected bool isAlive = true;
 
@@ -21,10 +22,10 @@ public abstract class Character : MonoBehaviour
 
     public event Action onDied;
 
-    private void Start()
-    {
-        Init();
-    }
+    //private void Start()
+    //{
+    //    Init();
+    //}
 
     public virtual void Init()
     {

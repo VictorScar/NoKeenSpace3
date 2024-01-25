@@ -3,15 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character
+public class Player : Character, IShooter
 {
     [SerializeField] private CameraHolder _cameraHolder;
-    [SerializeField] private PlayerInventory _inventory;
+    //[SerializeField] private CharacterInventory _inventory;
     [SerializeField] private HandsView _hands;
     
     private IAimComponent _aimComponent;
 
     private bool _isSprinting = false;
+
+    public IAimComponent AimingComponent => _aimComponent;
+
+    private void Start()
+    {
+        Init();
+    }
 
     public override void Init()
     {
@@ -19,6 +26,7 @@ public class Player : Character
         _aimComponent = _scanner.GetComponent<IAimComponent>();
         _aimComponent.Init();
         _hands.Init(_inventory, _aimComponent);
+        _inventory.EquipedWeapon?.Init(this);
     }
 
     public bool IsSprinting
@@ -48,7 +56,12 @@ public class Player : Character
     {
         var tool = _inventory.EquipedWeapon;
         var pos = _aimComponent.ThrowBeam(tool.ShootingDistance);
-        _inventory.EquipedWeapon.Fire(pos);
+        _inventory.EquipedWeapon.Fire();
+    }
+
+    public void Shoot()
+    {
+        throw new NotImplementedException();
     }
 
     public void Rotate(Vector2 inputDirection)
@@ -61,4 +74,5 @@ public class Player : Character
     {
         throw new NotImplementedException();
     }
+
 }

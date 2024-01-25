@@ -6,9 +6,9 @@ using UnityEngine;
 public class HandsView : MonoBehaviour
 {
     private IAimComponent _aimComponent;
-    private PlayerInventory _playerInventory;
+    private CharacterInventory _playerInventory;
 
-    public void Init(PlayerInventory inventory, IAimComponent aimComponent)
+    public void Init(CharacterInventory inventory, IAimComponent aimComponent)
     {
         _playerInventory = inventory;
         _aimComponent = aimComponent;

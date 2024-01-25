@@ -11,12 +11,20 @@ public class Weapon : MonoBehaviour
 
     private float _lastShootTime = 0f;
 
+    private IShooter _shooter;
+
     public bool IsActive { get; private set; } = true;
     public float ShootingDistance { get => _shootingDistance; }
 
-    public void Fire(Vector3 pos)
+    public void Init(IShooter shooter)
     {
-        if (!IsActive)
+        _shooter = shooter;
+        IsActive = true;
+    }
+
+    public void Fire()
+    {
+        if (_shooter == null || !IsActive)
         {
             return;
         }
@@ -28,7 +36,9 @@ public class Weapon : MonoBehaviour
             return;
         }
 
-        var shoorDirection = (pos - _muzzle.position).normalized;
+        var targetPoint = _shooter.AimingComponent.ThrowBeam(_shootingDistance);
+
+        var shoorDirection = (targetPoint - _muzzle.position).normalized;
         Shoot(shoorDirection);
         _lastShootTime = Time.time;
     }

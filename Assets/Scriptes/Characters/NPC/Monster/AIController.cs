@@ -18,6 +18,7 @@ public class AIController : CommandController
         if (_pawn is NPC_Character npc_Pawn)
         {
             _pawn = npc_Pawn;
+            _pawn.Init();
             StartCoroutine(AILoop());
         }
 
