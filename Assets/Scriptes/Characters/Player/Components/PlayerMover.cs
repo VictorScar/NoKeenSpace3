@@ -20,6 +20,17 @@ public class PlayerMover : CharacterMover
     private bool _useGravity = true;
     private bool _isJumping = false;
 
+    public override void Init(Character pawn)
+    {
+        base.Init(pawn);
+        _pawn.onDied += DisableMover;
+    }
+
+    private void DisableMover()
+    {
+        _charController.enabled = false;
+    }
+
     public override void Move(Vector2 dir, float moveSpeed)
     {
         if (dir == Vector2.zero)
@@ -77,7 +88,7 @@ public class PlayerMover : CharacterMover
         while (difference > 0.01f)
         {
             difference = jumpPoint.y - transform.position.y;
-            jumpSpeed =_jumpSpeedCurve.Evaluate(difference/beginDifference);
+            jumpSpeed = _jumpSpeedCurve.Evaluate(difference / beginDifference);
             Debug.Log(jumpSpeed.ToString());
 
             _charController.Move(jumpDir * jumpSpeed);
@@ -86,7 +97,7 @@ public class PlayerMover : CharacterMover
 
         _useGravity = true;
         _isJumping = false;
-       
+
     }
 
     public override void Rotate(float angle)
@@ -102,5 +113,13 @@ public class PlayerMover : CharacterMover
     public override void StopMoving()
     {
         throw new NotImplementedException();
+    }
+
+    private void OnDestroy()
+    {
+        if (_pawn != null)
+        {
+            _pawn.onDied -= DisableMover;
+        }
     }
 }

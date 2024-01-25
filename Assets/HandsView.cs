@@ -2,27 +2,32 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class HandsView : MonoBehaviour
 {
-    private IAimComponent _aimComponent;
-    private CharacterInventory _playerInventory;
+    [SerializeField] RotationConstraint _rotateConstraint;
 
-    public void Init(CharacterInventory inventory, IAimComponent aimComponent)
+    private IAimComponent _aimComponent;
+    //private CharacterInventory _playerInventory;
+    private Character _pawn;
+
+    public void Init(Character pawn, IAimComponent aimComponent)
     {
-        _playerInventory = inventory;
+        _pawn = pawn;
         _aimComponent = aimComponent;
         Orient();
+       // _pawn.onDied += DisableConstraint;
     }
 
     private void Orient()
     {
 
-        IDirectedTool equipedItem = _playerInventory.EquipedWeapon;
+        IDirectedTool equipedItem = _pawn.Inventory.EquipedWeapon;
 
         if (equipedItem == null)
         {
-            equipedItem = _playerInventory.EquipedTool;
+            equipedItem = _pawn.Inventory.EquipedTool;
 
             if (equipedItem == null)
             {
@@ -37,4 +42,14 @@ public class HandsView : MonoBehaviour
 
         transform.forward = aimDirection;
     }
+
+    //private void DisableConstraint()
+    //{
+    //    _rotateConstraint.enabled = false;
+    //}
+
+    //private void OnDestroy()
+    //{
+    //    //_pawn.onDied -= DisableConstraint;
+    //}
 }

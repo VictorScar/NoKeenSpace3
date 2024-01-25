@@ -8,6 +8,7 @@ public class Player : Character, ICanShoot, ICanUseTools
     [SerializeField] private CameraHolder _cameraHolder;
     
     [SerializeField] private HandsView _hands;
+    [SerializeField] protected AnimationController _animController;
     
     private IAimComponent _aimComponent;
 
@@ -25,8 +26,9 @@ public class Player : Character, ICanShoot, ICanUseTools
         base.Init();
         _aimComponent = _scanner.GetComponent<IAimComponent>();
         _aimComponent.Init();
-        _hands.Init(_inventory, _aimComponent);
+        _hands.Init(this, _aimComponent);
         _inventory.Init(this);
+        _animController.Init(this);
     }
 
     public override bool IsSprinting

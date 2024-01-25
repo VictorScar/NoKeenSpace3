@@ -84,7 +84,7 @@ public class InputController : CommandController
 
     private void Update()
     {
-        if (_pawn == null)
+        if (_pawn == null || !_pawn.IsAlive)
         {
             return;
         }

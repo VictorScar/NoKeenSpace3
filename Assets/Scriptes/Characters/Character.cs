@@ -20,6 +20,7 @@ public abstract class Character : MonoBehaviour
     protected float Health { get => _health; }
     public bool IsAlive { get => isAlive; set => isAlive = value; }
     public abstract bool IsSprinting { get; set; }
+    public CharacterInventory Inventory { get => _inventory; }
 
     public event Action onDied;
 
