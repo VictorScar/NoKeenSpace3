@@ -20,7 +20,8 @@ public class AimComponent : CharacterScanner, IAimComponent
     }
 
     public object ThrowBeam(float distance, out Vector3 impactPoint)
-    {        
+    {
+        _screenPoint = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         var ray = _camera.ScreenPointToRay(_screenPoint);
 
         if (Physics.Raycast(ray, out RaycastHit hit, distance))

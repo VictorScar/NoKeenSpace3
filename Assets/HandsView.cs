@@ -16,7 +16,7 @@ public class HandsView : MonoBehaviour
     {
         _pawn = pawn;
         _aimComponent = aimComponent;
-        Orient();
+        //Orient();
        // _pawn.onDied += DisableConstraint;
     }
 

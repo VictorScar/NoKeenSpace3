@@ -24,27 +24,27 @@ public class QuadWeapon : Weapon
     //    IsEquiped = true;
     //}
 
-    public override void Fire()
-    {
-        if (_shooter == null || !IsEquiped)
-        {
-            return;
-        }
+    //public override void Fire()
+    //{
+    //    if (_shooter == null || !IsEquiped)
+    //    {
+    //        return;
+    //    }
 
-        var remainingTime = Time.time - _lastShootTime;
+    //    var remainingTime = Time.time - _lastShootTime;
 
-        if (remainingTime < _rateOfTime)
-        {
-            return;
-        }
+    //    if (remainingTime < _rateOfTime)
+    //    {
+    //        return;
+    //    }
 
-        var targetPoint = Vector3.zero;
-        var impactObject = _shooter.AimingComponent.ThrowBeam(_shootingDistance, out targetPoint);
+    //    var targetPoint = Vector3.zero;
+    //    var impactObject = _shooter.AimingComponent.ThrowBeam(_shootingDistance, out targetPoint);
 
-        var shoorDirection = (targetPoint - _muzzle.position).normalized;
-        Shoot(shoorDirection);
-        _lastShootTime = Time.time;
-    }
+    //    var shoorDirection = (targetPoint - _muzzle.position).normalized;
+    //    Shoot(shoorDirection);
+    //    _lastShootTime = Time.time;
+    //}
 
     protected override void Shoot(Vector3 shoorDirection)
     {
