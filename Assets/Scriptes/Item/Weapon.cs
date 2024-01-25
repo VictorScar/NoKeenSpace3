@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
-public abstract class Weapon : MonoBehaviour, IDirectedTool
+public abstract class Weapon : Item, IEquipped, IDirectedTool
 {
     [SerializeField] protected Transform _muzzle;
     [SerializeField] protected float _rateOfTime = 0.5f;
@@ -10,21 +11,27 @@ public abstract class Weapon : MonoBehaviour, IDirectedTool
 
     protected float _lastShootTime = 0f;
 
-    protected ICanUseDistanceTools _shooter;
+    protected ICanAiming _shooter;
 
-    public ICanUseDistanceTools Shooter { get => _shooter; set => _shooter = value; }
+    public ICanAiming AimingAgent { get => _shooter; set => _shooter = value; }
 
     public float ShootingDistance => _shootingDistance;
 
     public bool IsEquiped { get; set; }
 
-    public virtual void Init(ICanUseDistanceTools shooter)
+    public virtual void Equip(Character owner)
     {
-        _shooter = shooter;
+        _shooter = owner as ICanAiming;
         IsEquiped = true;
     }
 
-    public virtual void Use()
+    //public virtual void Init(Character owner)
+    //{
+    //    _shooter = owner as ICanAiming;
+    //    IsEquiped = true;
+    //}
+
+    public virtual void Fire()
     {
         if (_shooter == null || !IsEquiped)
         {

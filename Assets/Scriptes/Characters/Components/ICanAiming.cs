@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICanUseDistanceTools
+public interface ICanAiming
 {
     public IAimComponent AimingComponent { get; }
-
-    public void UseEquipedTool();
+       
 }

@@ -7,11 +7,16 @@ public class InputController : CommandController
 {
     [SerializeField] private InputService _inputService;
 
-    private Player _pawn;
+    private ICanShoot _shooter;
+    private ICanUseTools _toolsUser;
+
+    private Character _pawn;
 
     public override void SetPawn(Character pawn)
     {
-        _pawn = pawn as Player;
+        _pawn = pawn;
+        _shooter = _pawn.GetComponent<ICanShoot>();
+        _toolsUser = _pawn.GetComponent<ICanUseTools>();
     }
 
     private void MoveCommands()
@@ -44,7 +49,24 @@ public class InputController : CommandController
 
         if (isUseCommand)
         {
-            _pawn.UseEquipedTool();
+            if (_shooter!= null)
+            {
+                if (_shooter.Shoot())
+                {
+                    if (_toolsUser != null)
+                    {
+                        _toolsUser.UseEquipedTool();
+                    }
+                    
+                }
+            }
+            else
+            {
+                if (_toolsUser != null)
+                {
+                    _toolsUser.UseEquipedTool();
+                }
+            }
         }
     }
 

@@ -17,14 +17,20 @@ public class HandsView : MonoBehaviour
 
     private void Orient()
     {
-        var equipedTool = _playerInventory.EquipedItem;
 
-        if (equipedTool == null)
+        IDirectedTool equipedItem = _playerInventory.EquipedWeapon;
+
+        if (equipedItem == null)
         {
-            return;
+            equipedItem = _playerInventory.EquipedTool;
+
+            if (equipedItem == null)
+            {
+                return;
+            }
         }
 
-        var aimDistance = equipedTool.ShootingDistance;
+        var aimDistance = equipedItem.ShootingDistance;
         var aimPoint = _aimComponent.AimPoint + _aimComponent.AimDirection * aimDistance;
 
         var aimDirection = (aimPoint - transform.position).normalized;

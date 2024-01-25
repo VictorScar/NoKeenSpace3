@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character, ICanUseDistanceTools
+public class Player : Character, ICanShoot, ICanUseTools
 {
     [SerializeField] private CameraHolder _cameraHolder;
     
@@ -29,7 +29,7 @@ public class Player : Character, ICanUseDistanceTools
         _inventory.Init(this);
     }
 
-    public bool IsSprinting
+    public override bool IsSprinting
     {
         get
         {
@@ -54,22 +54,17 @@ public class Player : Character, ICanUseDistanceTools
 
     public void UseEquipedTool()
     {
-        var tool = _inventory.EquipedItem;
+        var tool = _inventory.EquipedTool;
 
         if (tool == null)
         {
             return;
         }
-                        
-        _inventory.EquipedItem.Use();
+
+        tool.Use();
     }
 
-    public void Shoot()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Rotate(Vector2 inputDirection)
+    public override void Rotate(Vector2 inputDirection)
     {
         _mover.Rotate(inputDirection.x);
         _cameraHolder.Incline(inputDirection.y);
@@ -80,4 +75,18 @@ public class Player : Character, ICanUseDistanceTools
         throw new NotImplementedException();
     }
 
+    public bool Shoot()
+    {
+        var weapon = _inventory.EquipedWeapon;
+
+        if (weapon == null)
+        {
+            return false;
+        }
+        else
+        {
+            weapon.Fire();
+            return true;
+        }
+    }
 }

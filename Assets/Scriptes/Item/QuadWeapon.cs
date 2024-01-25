@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuadWeapon : Weapon, IDirectedTool
+public class QuadWeapon : Weapon
 {
     //[SerializeField] protected Transform _muzzle;
     [SerializeField] protected GameObject _bulletPrefab;
@@ -24,7 +24,7 @@ public class QuadWeapon : Weapon, IDirectedTool
     //    IsEquiped = true;
     //}
 
-    public override void Use()
+    public override void Fire()
     {
         if (_shooter == null || !IsEquiped)
         {
@@ -52,15 +52,5 @@ public class QuadWeapon : Weapon, IDirectedTool
         var bulletInstance = Instantiate(_bulletPrefab, _muzzle.position, Quaternion.identity);
         bulletInstance.transform.forward = shoorDirection;
     }
-
-    private void OnEnable()
-    {
-        IsEquiped = true;
-    }
-
-    private void OnDisable()
-    {
-        IsEquiped = false;
-    }
-
+    
 }

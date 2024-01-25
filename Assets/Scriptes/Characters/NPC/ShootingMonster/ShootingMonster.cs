@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingMonster : NPC_Character, ICanUseDistanceTools
+public class ShootingMonster : NPC_Character, ICanAiming
 {
     [SerializeField] protected float _shootDistance = 10f;
 
@@ -25,13 +25,13 @@ public class ShootingMonster : NPC_Character, ICanUseDistanceTools
             return;
         }
 
-        var equipedWeapon = _inventory.EquipedItem;
+        var equipedWeapon = _inventory.EquipedWeapon;
 
         if (equipedWeapon == null)
         {
             return;
         }
 
-        equipedWeapon.Use();
+        equipedWeapon.Fire();
     }
 }

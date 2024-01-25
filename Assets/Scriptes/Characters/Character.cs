@@ -19,6 +19,7 @@ public abstract class Character : MonoBehaviour
     protected float _moveSpeed;
     protected float Health { get => _health; }
     public bool IsAlive { get => isAlive; set => isAlive = value; }
+    public abstract bool IsSprinting { get; set; }
 
     public event Action onDied;
 
@@ -36,6 +37,8 @@ public abstract class Character : MonoBehaviour
     {
         _mover.Move(dir, _moveSpeed);
     }
+
+    public abstract void Rotate(Vector2 inputDirection);
 
     public abstract void StopMove();
 

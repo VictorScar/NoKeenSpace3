@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDirectedTool : IUsable
+public interface IDirectedTool
 {
-    public ICanUseDistanceTools Shooter { get; set; }
+    public ICanAiming AimingAgent { get; set; }
     public float ShootingDistance { get; }
-    public bool IsEquiped { get; set; }
-
-    public void Init(ICanUseDistanceTools shooter);
+        
  }
 
 
