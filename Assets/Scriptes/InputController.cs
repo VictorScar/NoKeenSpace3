@@ -44,7 +44,7 @@ public class InputController : CommandController
 
         if (isUseCommand)
         {
-            _pawn.UseEquipedItem();
+            _pawn.UseEquipedTool();
         }
     }
 

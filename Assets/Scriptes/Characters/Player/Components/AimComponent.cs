@@ -19,19 +19,20 @@ public class AimComponent : CharacterScanner, IAimComponent
         _aimPoint = _camera.ScreenToWorldPoint(_screenPoint);
     }
 
-    public Vector3 ThrowBeam(float distance)
+    public object ThrowBeam(float distance, out Vector3 impactPoint)
     {        
         var ray = _camera.ScreenPointToRay(_screenPoint);
 
         if (Physics.Raycast(ray, out RaycastHit hit, distance))
         {
             Debug.Log("DF");
-            return hit.point;
+            impactPoint = hit.point;
+            return hit.collider.gameObject;
         }
         else
         {
-            //var startPoint = _camera.ScreenToWorldPoint(_screenPoint);
-            return ray.origin + ray.direction * distance;
+            impactPoint = ray.origin + ray.direction * distance;
+            return null;
         }
     }
 

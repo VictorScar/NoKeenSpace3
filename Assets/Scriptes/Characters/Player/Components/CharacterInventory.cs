@@ -4,5 +4,12 @@ using UnityEngine;
 
 public class CharacterInventory : MonoBehaviour
 {
-    [SerializeField] public Weapon EquipedWeapon;
+    [SerializeField] private Weapon _startWepon;
+    [SerializeField] public IDirectedTool EquipedItem;
+
+    public void Init(ICanUseDistanceTools user)
+    {
+        EquipedItem = _startWepon;
+        EquipedItem?.Init(user);
+    }
 }

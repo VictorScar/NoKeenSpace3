@@ -2,29 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour, IDirectedTool
 {
-    [SerializeField] private Transform _muzzle;
-    [SerializeField] private GameObject _bulletPrefab;
-    [SerializeField] private float _rateOfTime = 0.5f;
-    [SerializeField] private float _shootingDistance = 20f;
+    [SerializeField] protected Transform _muzzle;
+    [SerializeField] protected float _rateOfTime = 0.5f;
+    [SerializeField] protected float _shootingDistance = 20f;
 
-    private float _lastShootTime = 0f;
+    protected float _lastShootTime = 0f;
 
-    private IShooter _shooter;
+    protected ICanUseDistanceTools _shooter;
 
-    public bool IsActive { get; private set; } = true;
-    public float ShootingDistance { get => _shootingDistance; }
+    public ICanUseDistanceTools Shooter { get => _shooter; set => _shooter = value; }
 
-    public void Init(IShooter shooter)
+    public float ShootingDistance => _shootingDistance;
+
+    public bool IsEquiped { get; set; }
+
+    public virtual void Init(ICanUseDistanceTools shooter)
     {
         _shooter = shooter;
-        IsActive = true;
+        IsEquiped = true;
     }
 
-    public void Fire()
+    public virtual void Use()
     {
-        if (_shooter == null || !IsActive)
+        if (_shooter == null || !IsEquiped)
         {
             return;
         }
@@ -36,28 +38,14 @@ public class Weapon : MonoBehaviour
             return;
         }
 
-        var targetPoint = _shooter.AimingComponent.ThrowBeam(_shootingDistance);
+        var targetPoint = Vector3.zero;
+        var impactObject = _shooter.AimingComponent.ThrowBeam(_shootingDistance, out targetPoint);
 
         var shoorDirection = (targetPoint - _muzzle.position).normalized;
         Shoot(shoorDirection);
         _lastShootTime = Time.time;
     }
 
-    private void Shoot(Vector3 shoorDirection)
-    {
-        var bulletDirection = Quaternion.Euler(shoorDirection);
-        var bulletInstance = Instantiate(_bulletPrefab, _muzzle.position, Quaternion.identity);
-        bulletInstance.transform.forward = shoorDirection;
-    }
-
-    private void OnEnable()
-    {
-        IsActive = true;
-    }
-
-    private void OnDisable()
-    {
-        IsActive = false;
-    }
+    protected abstract void Shoot(Vector3 shoorDirection);
 
 }

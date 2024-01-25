@@ -13,9 +13,8 @@ public class NPC_Aiming : MonoBehaviour, IAimComponent
         throw new System.NotImplementedException();
     }
 
-    public Vector3 ThrowBeam(float distance)
+    public object ThrowBeam(float distance, out Vector3 impactPoint)
     {
         throw new System.NotImplementedException();
     }
-
 }

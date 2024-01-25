@@ -17,7 +17,7 @@ public class HandsView : MonoBehaviour
 
     private void Orient()
     {
-        var equipedTool = _playerInventory.EquipedWeapon;
+        var equipedTool = _playerInventory.EquipedItem;
 
         if (equipedTool == null)
         {
