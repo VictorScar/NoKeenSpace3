@@ -49,24 +49,30 @@ public class InputController : CommandController
 
         if (isUseCommand)
         {
-            if (_shooter!= null)
+            if (!ShootCommand())
             {
-                if (_shooter.Shoot())
-                {
-                    if (_toolsUser != null)
-                    {
-                        _toolsUser.UseEquipedTool();
-                    }
-                    
-                }
+                UseEquipedItemCommand();
             }
-            else
-            {
-                if (_toolsUser != null)
-                {
-                    _toolsUser.UseEquipedTool();
-                }
-            }
+        }
+    }
+
+    private bool ShootCommand()
+    {
+        if (_shooter != null)
+        {
+            return _shooter.Shoot();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void UseEquipedItemCommand()
+    {
+        if (_toolsUser != null)
+        {
+            _toolsUser.UseEquipedTool();
         }
     }
 
