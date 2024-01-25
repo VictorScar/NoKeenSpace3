@@ -38,7 +38,7 @@ public class CombatController : MonoBehaviour
     {
         if (_pawn != null)
         {
-            _pawn.Target.GetDamage(_fighter.MeleeDamage);
+            _pawn.Target.GetDamage(_fighter.MeleeDamage, _pawn);
             onStrike?.Invoke();
             Debug.Log("Attacking!");
         }

@@ -567,7 +567,7 @@ MonoBehaviour:
   _muzzle: {fileID: 4676706950573496746}
   _rateOfTime: 0.5
   _shootingDistance: 20
-  _bulletPrefab: {fileID: 3843441164858639877, guid: 5c36414f5976be34f9569f247d4bf3de, type: 3}
+  _bulletPrefab: {fileID: 443797021330377305, guid: 5c36414f5976be34f9569f247d4bf3de, type: 3}
 --- !u!1 &6894373872162729992
 GameObject:
   m_ObjectHideFlags: 0

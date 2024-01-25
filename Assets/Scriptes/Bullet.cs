@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,16 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float _damage = 20f;
     [SerializeField] private Rigidbody _rb;
 
-    IEnumerator Start()
+    private Character _owner;
+
+
+    public void Init(Character owner)
+    {
+        _owner = owner;
+        StartCoroutine(ProjectileFly());
+    }
+
+    private IEnumerator ProjectileFly()
     {
         var remainingTime = 0f;
 
@@ -23,6 +33,7 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<Bullet>())
@@ -34,7 +45,7 @@ public class Bullet : MonoBehaviour
 
         if (character != null)
         {
-            character.GetDamage(_damage);
+            character.GetDamage(_damage, _owner);
         }
 
         Destroy(gameObject);

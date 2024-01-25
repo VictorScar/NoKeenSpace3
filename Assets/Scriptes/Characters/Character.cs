@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour, ITakeDamage
 {
     [SerializeField] protected float _health;
     [SerializeField] protected float _maxHealth;
@@ -48,7 +48,7 @@ public abstract class Character : MonoBehaviour
         _mover.Jump();
     }
 
-    public virtual void GetDamage(float damage)
+    public virtual void GetDamage(float damage, Character attacker)
     {
         _health -= damage;
         _health = Mathf.Clamp(_health, 0f, 5000f);

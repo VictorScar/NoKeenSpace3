@@ -12,6 +12,7 @@ public abstract class Weapon : Item, IEquipped, IDirectedTool
     protected float _lastShootTime = 0f;
 
     protected ICanAiming _shooter;
+    protected Character _owner;
 
     public ICanAiming AimingAgent { get => _shooter; set => _shooter = value; }
 
@@ -21,7 +22,8 @@ public abstract class Weapon : Item, IEquipped, IDirectedTool
 
     public virtual void Equip(Character owner)
     {
-        _shooter = owner as ICanAiming;
+        _owner = owner;
+        _shooter = _owner as ICanAiming;
         IsEquiped = true;
     }
 

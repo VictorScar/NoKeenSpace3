@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class NPC_Character : Character
 {
-    [SerializeField] Player _target;
+    [SerializeField] private Player _target;
 
     protected NPC_Scanner _npcScanner;
 
@@ -41,5 +41,21 @@ public class NPC_Character : Character
     public override void Rotate(Vector2 inputDirection)
     {
         throw new NotImplementedException();
+    }
+
+    public override void GetDamage(float damage, Character attacker)
+    {
+        base.GetDamage(damage, attacker);
+
+        if (Target == null)
+        {
+            Target = attacker as Player;
+        }
+    }
+
+    public override void Deth()
+    {
+        StopMove();
+        base.Deth();
     }
 }
