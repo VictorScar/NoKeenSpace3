@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingMonster : NPC_Character, ICanAiming
+public class ShootingMonster : NPC_Character, ICanShoot
 {
     [SerializeField] protected float _shootDistance = 10f;
 
@@ -16,22 +16,42 @@ public class ShootingMonster : NPC_Character, ICanAiming
         base.Init();
         _aimingComponent = GetComponent<IAimComponent>();
 
+        _inventory.Init(this);
+
     }
 
-    public void UseEquipedTool()
+    public bool Shoot()
     {
         if (AimingComponent == null)
         {
-            return;
+            return false;
         }
 
         var equipedWeapon = _inventory.EquipedWeapon;
 
         if (equipedWeapon == null)
         {
-            return;
+            return false;
         }
 
         equipedWeapon.Fire();
+        return true;
     }
+
+    //public void UseEquipedTool()
+    //{
+    //    if (AimingComponent == null)
+    //    {
+    //        return;
+    //    }
+
+    //    var equipedWeapon = _inventory.EquipedWeapon;
+
+    //    if (equipedWeapon == null)
+    //    {
+    //        return;
+    //    }
+
+    //    equipedWeapon.Fire();
+    //}
 }

@@ -6,6 +6,14 @@ using UnityEngine.AI;
 public class NPC_Mover : CharacterMover
 {
     [SerializeField] protected NavMeshAgent _agent;
+    protected NPC_Character _npcPawn;
+
+    public override void Init(Character pawn)
+    {
+        base.Init(pawn);
+        _npcPawn = _pawn as NPC_Character;
+
+    }
 
     public override void Jump()
     {
@@ -30,6 +38,7 @@ public class NPC_Mover : CharacterMover
 
     public override void Rotate(float angle)
     {
-        
+        //transform.rotation *= Quaternion.Euler(0, angle, 0);
+        transform.LookAt(_npcPawn.Target.transform);
     }
 }

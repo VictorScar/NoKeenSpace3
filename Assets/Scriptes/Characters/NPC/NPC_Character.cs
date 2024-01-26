@@ -40,7 +40,7 @@ public class NPC_Character : Character
 
     public override void Rotate(Vector2 inputDirection)
     {
-        throw new NotImplementedException();
+        _mover.Rotate(inputDirection.y);
     }
 
     public override void GetDamage(float damage, Character attacker)

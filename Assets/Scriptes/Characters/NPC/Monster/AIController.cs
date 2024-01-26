@@ -7,12 +7,18 @@ public class AIController : CommandController
 {
     [SerializeField] protected NPC_Character _pawn;
     private IMeleeFighter _meleeFighter;
+    private ICanShoot _shooter;
 
     private void Start()
     {
         if (_pawn is IMeleeFighter meleeFighter)
         {
             _meleeFighter = meleeFighter;
+        }
+
+        if (_pawn is ICanShoot shooter)
+        {
+            _shooter = shooter;
         }
 
         if (_pawn is NPC_Character npc_Pawn)
@@ -31,6 +37,21 @@ public class AIController : CommandController
         if (_meleeFighter != null)
         {
             requiredDistance = _meleeFighter.MeleeAttackDistance;
+        }
+        else if (_shooter != null)
+        {
+            var equipedItem = _pawn.Inventory.EquipedWeapon;
+
+            if (equipedItem != null)
+            {
+                requiredDistance = equipedItem.ShootingDistance - 0.5f;
+            }
+            
+
+            if (requiredDistance == 0)
+            {
+                requiredDistance = 9f;
+            }
         }
 
         while (_pawn.IsAlive)
@@ -56,6 +77,15 @@ public class AIController : CommandController
                     if (_meleeFighter != null)
                     {
                         _meleeFighter.Attacking();
+                    }
+                    else if (_shooter != null)
+                    {
+                        var targetPosition = _pawn.Target.transform.position;
+                        var dir = targetPosition = (_pawn.transform .position).normalized;
+                        var angle = Vector3.Angle(dir, _pawn.transform.forward);
+                        var rotateDir = new Vector2(0, angle);
+                        _pawn.Rotate(rotateDir);
+                        _shooter.Shoot();
                     }
                 }
                

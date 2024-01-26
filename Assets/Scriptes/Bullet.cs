@@ -41,7 +41,8 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        var character = other.GetComponent<Character>();
+        var character = other.GetComponentInParent<Character>();
+      
 
         if (character != null)
         {

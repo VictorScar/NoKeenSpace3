@@ -32,6 +32,7 @@ public abstract class Character : MonoBehaviour, ITakeDamage
     public virtual void Init()
     {
         _moveSpeed = _baseSpeed;
+        _mover.Init(this);
     }
 
     public virtual void Move(Vector2 dir)
