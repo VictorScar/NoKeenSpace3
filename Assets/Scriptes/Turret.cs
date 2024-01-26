@@ -23,13 +23,21 @@ public class Turret : MonoBehaviour
         var angle = Vector3.Angle(_muzzle.transform.forward, dirTo);
 
 
-        Debug.Log(angle);
+        
 
-        if (_muzzle.forward != dirTo)
+        if (true)
         {
-            var turn = Quaternion.LookRotation(dirTo, Vector3.up);
-            var delta = new Quaternion(turn.x * Time.deltaTime, turn.y * Time.deltaTime, turn.z, turn.w);
-            _tower.rotation = turn;
+            var requiredTurn = Quaternion.LookRotation(dirTo);
+            //var requiredTurn = Quaternion.Euler(dirTo);
+            
+            //_tower.rotation *= requiredTurn;
+            var delta = Quaternion.Lerp(_tower.rotation, requiredTurn, 5f* Time.deltaTime);
+            _tower.rotation = delta;
+            Debug.Log(delta);
+            //_tower.rotation *= requiredTurn;
+            //var turn = Quaternion.LookRotation(dirTo, Vector3.up);
+            //var delta = new Quaternion(turn.x * Time.deltaTime, turn.y * Time.deltaTime, turn.z, turn.w);
+            //_tower.rotation = turn;
         }
         //if (Mathf.Abs(angle) > _checkAngle)
         //{
