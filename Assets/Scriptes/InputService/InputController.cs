@@ -76,45 +76,8 @@ public class InputController : CommandController
             }
         }
 
-        //var useContext = GetUsingContext();
-
-        //switch (useContext)
-        //{
-        //    case UseActionsContext.None:
-        //        break;
-        //    case UseActionsContext.Shooting:
-        //        _shooter.Shoot();
-        //        break;
-        //    case UseActionsContext.UseTools:
-        //        _toolsUser.UseEquipedTool();
-        //        break;
-        //    default:
-        //        break;
-        //}
     }
-
-    //private UseActionsContext GetUsingContext()
-    //{
-    //    if (_toolsUser == null)
-    //    {
-    //        if (_shooter != null)
-    //        {
-    //            return UseActionsContext.Shooting;
-    //        }
-    //        return UseActionsContext.None;
-    //    }
-
-    //    if (_toolsUser.EquipedWeapon != null)
-    //    {
-    //        return UseActionsContext.Shooting;
-    //    }
-    //    else if (_toolsUser.EquipedTool != null)
-    //    {
-    //        return UseActionsContext.UseTools;
-    //    }
-
-    //    return UseActionsContext.None;
-    //}
+       
 
     private void UseActionCommand()
     {
@@ -125,26 +88,7 @@ public class InputController : CommandController
             ProcessUseCommands();
         }
     }
-
-    //private bool ShootCommand()
-    //{
-    //    if (_shooter != null)
-    //    {
-    //        return _shooter.Shoot();
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
-
-    //private void UseEquipedItemCommand()
-    //{
-    //    if (_toolsUser != null)
-    //    {
-    //        _toolsUser.UseEquipedTool();
-    //    }
-    //}
+      
 
     private void ProcessSprintCommand()
     {

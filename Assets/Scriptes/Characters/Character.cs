@@ -14,6 +14,9 @@ public abstract class Character : MonoBehaviour, ITakeDamage
     [SerializeField] protected CharacterScanner _scanner;
     [SerializeField] protected CharacterInventory _inventory;
 
+
+    [SerializeField] protected bool isImmortal = false;
+
     protected bool isAlive = true;
 
     protected float _moveSpeed;
@@ -24,10 +27,7 @@ public abstract class Character : MonoBehaviour, ITakeDamage
 
     public event Action onDied;
 
-    //private void Start()
-    //{
-    //    Init();
-    //}
+ 
 
     public virtual void Init()
     {
@@ -51,6 +51,11 @@ public abstract class Character : MonoBehaviour, ITakeDamage
 
     public virtual void GetDamage(float damage, Character attacker)
     {
+        if (isImmortal)
+        {
+            return;
+        }
+
         _health -= damage;
         _health = Mathf.Clamp(_health, 0f, 5000f);
 
