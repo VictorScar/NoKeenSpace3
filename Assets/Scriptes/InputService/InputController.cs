@@ -9,6 +9,7 @@ public class InputController : CommandController
 
     private ICanShoot _shooter;
     private ICanUseTools _toolsUser;
+    private IPlayerControlable _controlable;
 
     private Character _pawn;
 
@@ -17,30 +18,81 @@ public class InputController : CommandController
         _pawn = pawn;
         _shooter = _pawn.GetComponent<ICanShoot>();
         _toolsUser = _pawn.GetComponent<ICanUseTools>();
+        _controlable = _pawn.GetComponent<IPlayerControlable>();
+
     }
 
     private void MoveCommands()
     {
-        var moveDir = _inputService.OnMoveInput();
-        //Debug.Log(moveDir);
-        _pawn.Move(moveDir);
+        if (_controlable != null)
+        {
+            var moveDir = _inputService.OnMoveInput();
+            _controlable.Move(moveDir);
+        }
     }
 
     private void RotateCommands()
     {
-        var inputRotation = _inputService.OnMouseMotion();
-        _pawn.Rotate(inputRotation);
+        if (_controlable != null)
+        {
+            var inputRotation = _inputService.OnMouseMotion();
+            _controlable.Rotate(inputRotation);
+        }
     }
 
     private void JumpCommand()
     {
-        var isJumpInput = _inputService.OnJumpInput();
-
-        if (isJumpInput)
+        if (_controlable != null)
         {
-            _pawn.Jump();
+            var isJumpInput = _inputService.OnJumpInput();
+
+            if (isJumpInput)
+            {
+                _controlable.Jump();
+            }
+        }
+    }
+
+    private void ProcessUseCommands()
+    {
+        var useContext = GetUsingContext();
+
+        switch (useContext)
+        {
+            case UseActionsContext.None:
+                break;
+            case UseActionsContext.Shooting:
+                _shooter.Shoot();
+                break;
+            case UseActionsContext.UseTools:
+                _toolsUser.UseEquipedTool();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private UseActionsContext GetUsingContext()
+    {
+        if (_toolsUser == null)
+        {
+            if (_shooter != null)
+            {
+                return UseActionsContext.Shooting;
+            }
+            return UseActionsContext.None;
         }
 
+        if (_toolsUser.EquipedWeapon != null)
+        {
+            return UseActionsContext.Shooting;
+        }
+        else if (_toolsUser.EquipedTool != null)
+        {
+            return UseActionsContext.UseTools;
+        }
+
+        return UseActionsContext.None;
     }
 
     private void UseIEqiuipedtem()
@@ -49,10 +101,7 @@ public class InputController : CommandController
 
         if (isUseCommand)
         {
-            if (!ShootCommand())
-            {
-                UseEquipedItemCommand();
-            }
+            ProcessUseCommands();
         }
     }
 

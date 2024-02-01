@@ -35,12 +35,12 @@ public abstract class Character : MonoBehaviour, ITakeDamage
         _mover.Init(this);
     }
 
-    public virtual void Move(Vector2 dir)
-    {
-        _mover.Move(dir, _moveSpeed);
-    }
+    //public virtual void Move(Vector2 dir)
+    //{
+    //    _mover.Move(dir, _moveSpeed);
+    //}
 
-    public abstract void Rotate(Vector2 inputDirection);
+    //public abstract void Rotate(Vector2 inputDirection);
 
     public abstract void StopMove();
 

@@ -38,7 +38,7 @@ public class NPC_Character : Character
         _mover.StopMoving();
     }
 
-    public override void Rotate(Vector2 inputDirection)
+    public void Rotate(Vector2 inputDirection)
     {
         _mover.Rotate(inputDirection.y);
     }
