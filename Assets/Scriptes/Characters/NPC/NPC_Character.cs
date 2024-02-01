@@ -7,8 +7,11 @@ public class NPC_Character : Character
 
     [SerializeField] protected NPC_LookPoint _lookPoint;
 
+    [SerializeField] protected MonsterAnimationController _animController;
     protected NPC_Scanner _npcScanner;
     protected NPC_Mover _npcMover;
+
+
 
     public Action onAttacking;
 
@@ -17,6 +20,7 @@ public class NPC_Character : Character
         base.Init();
         _npcScanner = _scanner as NPC_Scanner;
         _npcMover = _mover as NPC_Mover;
+        _animController?.Init(this);
     }
 
     public Player Target { get => _target; set => _target = value; }

@@ -6,7 +6,7 @@ public class ShootingMonster : NPC_Character, ICanShoot
 {
     [SerializeField] protected float _shootDistance = 10f;
 
-    [SerializeField] protected MonsterAnimationController _animController;
+   // [SerializeField] protected MonsterAnimationController _animController;
 
     private IAimComponent _aimingComponent;
     private QuadWeapon _weaponSource;

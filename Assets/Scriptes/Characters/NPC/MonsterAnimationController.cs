@@ -34,7 +34,8 @@ public class MonsterAnimationController : AnimationController
 
     private void DefaultAnimation()
     {
-        _animator.CrossFade("Idle", 0.1f);
+        if (_npcPawn.IsAlive)
+            _animator.CrossFade("Idle", 0.1f);
     }
 
     private void MoveAnimation(bool isMoving)
