@@ -35,15 +35,14 @@ public class PlayerMover : CharacterMover
     {
         if (dir == Vector2.zero)
         {
-            _isMoving = false;
+            IsMoving = false;
             _inputDirection = Vector3.zero;
             return;
         }
 
-        _isMoving = true;
-
+        IsMoving = true;
         _inputDirection = (transform.forward * dir.y + transform.right * dir.x) * moveSpeed;
-        
+
     }
 
 

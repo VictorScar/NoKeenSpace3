@@ -10,6 +10,8 @@ public class NPC_Character : Character
     protected NPC_Scanner _npcScanner;
     protected NPC_Mover _npcMover;
 
+    public Action onAttacking;
+
     public override void Init()
     {
         base.Init();
@@ -62,6 +64,11 @@ public class NPC_Character : Character
     {
         //var dirTo = (targetPos - transform.position).normalized;
         return _npcMover.TurnTo(dirTo);
+    }
+
+    protected void OnAttacking()
+    {
+        onAttacking?.Invoke();
     }
 
     public override void GetDamage(float damage, Character attacker)

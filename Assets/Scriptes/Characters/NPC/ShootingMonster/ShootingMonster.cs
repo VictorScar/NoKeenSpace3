@@ -6,6 +6,8 @@ public class ShootingMonster : NPC_Character, ICanShoot
 {
     [SerializeField] protected float _shootDistance = 10f;
 
+    [SerializeField] protected MonsterAnimationController _animController;
+
     private IAimComponent _aimingComponent;
     private QuadWeapon _weaponSource;
 
@@ -18,7 +20,8 @@ public class ShootingMonster : NPC_Character, ICanShoot
         base.Init();
         _aimingComponent = GetComponent<IAimComponent>();
 
-        _inventory.Init(this);
+        _inventory?.Init(this);
+        _animController?.Init(this);
 
     }
 
@@ -37,6 +40,7 @@ public class ShootingMonster : NPC_Character, ICanShoot
         }
 
         equipedWeapon.Fire();
+        OnAttacking();
         return true;
     }
 }

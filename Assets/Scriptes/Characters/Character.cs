@@ -10,6 +10,8 @@ public abstract class Character : MonoBehaviour, ITakeDamage
     [SerializeField] protected float _baseSpeed;
     [SerializeField] protected float _sprintSpeed;
 
+    [SerializeField] protected float _removeDeadBodyTime = 15f;
+
     [SerializeField] protected CharacterMover _mover;
     [SerializeField] protected CharacterScanner _scanner;
     [SerializeField] protected CharacterInventory _inventory;
@@ -28,9 +30,10 @@ public abstract class Character : MonoBehaviour, ITakeDamage
     public float MoveSpeed { get => _moveSpeed; }
     public Vector3 MoveDirection { get => _mover.MoveDirection; }
 
+    public event Action<bool> onMoving;
     public event Action onDied;
 
- 
+
 
     public virtual void Init()
     {
@@ -47,10 +50,17 @@ public abstract class Character : MonoBehaviour, ITakeDamage
 
     public abstract void StopMove();
 
+    public void OnMoving(bool isMoving)
+    {
+        onMoving?.Invoke(isMoving);
+    }
+
     public virtual void Jump()
     {
         _mover.Jump();
     }
+
+
 
     public virtual void GetDamage(float damage, Character attacker)
     {
@@ -70,7 +80,14 @@ public abstract class Character : MonoBehaviour, ITakeDamage
 
     public virtual void Deth()
     {
-        onDied?.Invoke();
         IsAlive = false;
+        onDied?.Invoke();
+        StartCoroutine(RemoveBody(_removeDeadBodyTime));
+    }
+
+    private IEnumerator RemoveBody(float timeToRemove)
+    {
+        yield return new WaitForSeconds(timeToRemove);
+        Destroy(gameObject);
     }
 }
