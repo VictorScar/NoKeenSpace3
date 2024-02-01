@@ -25,6 +25,9 @@ public abstract class Character : MonoBehaviour, ITakeDamage
     public abstract bool IsSprinting { get; set; }
     public CharacterInventory Inventory { get => _inventory; }
 
+    public float MoveSpeed { get => _moveSpeed; }
+    public Vector3 MoveDirection { get => _mover.MoveDirection; }
+
     public event Action onDied;
 
  

@@ -9,6 +9,8 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
     
     [SerializeField] private HandsView _hands;
     [SerializeField] protected AnimationController _animController;
+
+    protected PlayerMover _playerMover;
     
     private IAimComponent _aimComponent;
 
@@ -29,6 +31,7 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
         _hands.Init(this, _aimComponent);
         _inventory.Init(this);
         _animController.Init(this);
+        _playerMover = _mover as PlayerMover;
     }
 
     public override bool IsSprinting
@@ -72,7 +75,7 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
 
     public void Rotate(Vector2 inputDirection)
     {
-        _mover.Rotate(inputDirection.x);
+        _playerMover.Rotate(inputDirection.x);
         _cameraHolder.Incline(inputDirection.y);
     }
 
@@ -103,6 +106,6 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
 
     public void Move(Vector2 inputDir)
     {
-        _mover.Move(inputDir, _moveSpeed);
+        _playerMover.Move(inputDir, _moveSpeed);
     }
 }

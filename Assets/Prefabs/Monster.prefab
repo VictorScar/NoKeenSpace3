@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8808768708113209349}
   - component: {fileID: 5484028419988705567}
   m_Layer: 0
-  m_Name: LookPoint
+  m_Name: ScanPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,6 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4280662103976297949}
+  - {fileID: 1510861871371355545}
   m_Father: {fileID: 8870324932469083831}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5484028419988705567
@@ -49,6 +50,52 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 2048
+--- !u!1 &1863253707474648522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510861871371355545}
+  - component: {fileID: 7428491053978528437}
+  m_Layer: 0
+  m_Name: LookPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1510861871371355545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863253707474648522}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8808768708113209349}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7428491053978528437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863253707474648522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a279d1efed201d24ab5a1c41f7309558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotateSpeed: 10
+  _minRequiredAngle: 0.1
 --- !u!1 &4228853835069440045
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +258,10 @@ MonoBehaviour:
   _sprintSpeed: 10
   _mover: {fileID: 1713020487879254430}
   _scanner: {fileID: 5484028419988705567}
+  _inventory: {fileID: 0}
+  isImmortal: 0
   _target: {fileID: 0}
+  _lookPoint: {fileID: 7428491053978528437}
   _meleeDamage: 20
   _attackDistance: 2
   _attackPeriod: 1
@@ -229,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GravityForce: 0
+  _rotateSpeed: 2
   _agent: {fileID: 2869595362886510752}
 --- !u!195 &2869595362886510752
 NavMeshAgent:

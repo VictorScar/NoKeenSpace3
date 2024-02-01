@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class NPC_Mover : CharacterMover
 {
+    [SerializeField] protected float _rotateSpeed = 2f;
+    [SerializeField] protected float _minRequiredAngle = 0.2f;
     [SerializeField] protected NavMeshAgent _agent;
     protected NPC_Character _npcPawn;
 
@@ -20,12 +22,8 @@ public class NPC_Mover : CharacterMover
         throw new System.NotImplementedException();
     }
 
-    public override void Move(Vector2 dir, float moveSpeed)
-    {
-        throw new System.NotImplementedException();
-    }
 
-    public override void MoveTo(Vector3 targetPos, float moveSpeed)
+    public void MoveTo(Vector3 targetPos, float moveSpeed)
     {
         _agent.speed = moveSpeed;
         _agent.SetDestination(targetPos);
@@ -36,9 +34,27 @@ public class NPC_Mover : CharacterMover
         _agent.speed = 0f;
     }
 
-    public override void Rotate(float angle)
+    public bool TurnTo(Vector3 dirTo)
     {
-        //transform.rotation *= Quaternion.Euler(0, angle, 0);
-        transform.LookAt(_npcPawn.Target.transform);
+        //Debug.Log(dirTo);
+               
+        //var reqiredRotation = Quaternion.LookRotation(dirTo);
+        var angle = Vector3.SignedAngle(transform.forward, dirTo, transform.up);
+        
+
+        var deltRotation = _rotateSpeed * Time.deltaTime;
+      
+
+        // transform.rotation = Quaternion.Lerp(transform.rotation, reqiredRotation, deltRotation);
+        if (Mathf.Abs(angle) > _minRequiredAngle)
+        {
+            transform.rotation *= Quaternion.Euler(0, angle *_rotateSpeed * Time.deltaTime, 0);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+              
     }
 }
