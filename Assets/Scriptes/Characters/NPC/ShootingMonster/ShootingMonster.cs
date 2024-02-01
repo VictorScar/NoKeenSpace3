@@ -11,6 +11,8 @@ public class ShootingMonster : NPC_Character, ICanShoot
 
     public IAimComponent AimingComponent => _aimingComponent;
 
+    public Weapon EquipedWeapon => _weaponSource;
+
     public override void Init()
     {
         base.Init();
@@ -37,21 +39,4 @@ public class ShootingMonster : NPC_Character, ICanShoot
         equipedWeapon.Fire();
         return true;
     }
-
-    //public void UseEquipedTool()
-    //{
-    //    if (AimingComponent == null)
-    //    {
-    //        return;
-    //    }
-
-    //    var equipedWeapon = _inventory.EquipedWeapon;
-
-    //    if (equipedWeapon == null)
-    //    {
-    //        return;
-    //    }
-
-    //    equipedWeapon.Fire();
-    //}
 }

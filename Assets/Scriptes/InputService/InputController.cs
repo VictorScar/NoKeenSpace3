@@ -13,6 +13,9 @@ public class InputController : CommandController
 
     private Character _pawn;
 
+    private bool _canUseTool = false;
+    private bool _canShoot = false;
+
     public override void SetPawn(Character pawn)
     {
         _pawn = pawn;
@@ -20,6 +23,8 @@ public class InputController : CommandController
         _toolsUser = _pawn.GetComponent<ICanUseTools>();
         _controlable = _pawn.GetComponent<IPlayerControlable>();
 
+        _canUseTool = _toolsUser != null;
+        _canShoot = _shooter != null;
     }
 
     private void MoveCommands()
@@ -55,47 +60,63 @@ public class InputController : CommandController
 
     private void ProcessUseCommands()
     {
-        var useContext = GetUsingContext();
-
-        switch (useContext)
+        if (_canShoot)
         {
-            case UseActionsContext.None:
-                break;
-            case UseActionsContext.Shooting:
-                _shooter.Shoot();
-                break;
-            case UseActionsContext.UseTools:
-                _toolsUser.UseEquipedTool();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private UseActionsContext GetUsingContext()
-    {
-        if (_toolsUser == null)
-        {
-            if (_shooter != null)
+            if(_shooter.EquipedWeapon != null)
             {
-                return UseActionsContext.Shooting;
+                _shooter.Shoot();
+                return;
             }
-            return UseActionsContext.None;
+        }
+        if (_canUseTool)
+        {
+            if (_toolsUser.EquipedTool != null)
+            {
+                _toolsUser.UseEquipedTool();
+            }
         }
 
-        if (_toolsUser.EquipedWeapon != null)
-        {
-            return UseActionsContext.Shooting;
-        }
-        else if (_toolsUser.EquipedTool != null)
-        {
-            return UseActionsContext.UseTools;
-        }
+        //var useContext = GetUsingContext();
 
-        return UseActionsContext.None;
+        //switch (useContext)
+        //{
+        //    case UseActionsContext.None:
+        //        break;
+        //    case UseActionsContext.Shooting:
+        //        _shooter.Shoot();
+        //        break;
+        //    case UseActionsContext.UseTools:
+        //        _toolsUser.UseEquipedTool();
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 
-    private void UseIEqiuipedtem()
+    //private UseActionsContext GetUsingContext()
+    //{
+    //    if (_toolsUser == null)
+    //    {
+    //        if (_shooter != null)
+    //        {
+    //            return UseActionsContext.Shooting;
+    //        }
+    //        return UseActionsContext.None;
+    //    }
+
+    //    if (_toolsUser.EquipedWeapon != null)
+    //    {
+    //        return UseActionsContext.Shooting;
+    //    }
+    //    else if (_toolsUser.EquipedTool != null)
+    //    {
+    //        return UseActionsContext.UseTools;
+    //    }
+
+    //    return UseActionsContext.None;
+    //}
+
+    private void UseActionCommand()
     {
         var isUseCommand = _inputService.OnUseInput();
 
@@ -105,25 +126,25 @@ public class InputController : CommandController
         }
     }
 
-    private bool ShootCommand()
-    {
-        if (_shooter != null)
-        {
-            return _shooter.Shoot();
-        }
-        else
-        {
-            return false;
-        }
-    }
+    //private bool ShootCommand()
+    //{
+    //    if (_shooter != null)
+    //    {
+    //        return _shooter.Shoot();
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
 
-    private void UseEquipedItemCommand()
-    {
-        if (_toolsUser != null)
-        {
-            _toolsUser.UseEquipedTool();
-        }
-    }
+    //private void UseEquipedItemCommand()
+    //{
+    //    if (_toolsUser != null)
+    //    {
+    //        _toolsUser.UseEquipedTool();
+    //    }
+    //}
 
     private void ProcessSprintCommand()
     {
@@ -142,7 +163,7 @@ public class InputController : CommandController
         RotateCommands();
         MoveCommands();
         JumpCommand();
-        UseIEqiuipedtem();
+        UseActionCommand();
     }
 
 }

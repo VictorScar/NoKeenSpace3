@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface ICanUseTools : ICanAiming
 {
-    public  Weapon EquipedWeapon { get; }
+    //public  Weapon EquipedWeapon { get; }
     public  Tool EquipedTool { get; }
     public void UseEquipedTool();
 }
