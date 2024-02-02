@@ -9,7 +9,7 @@ public class ShootingMonster : NPC_Character, ICanShoot
    // [SerializeField] protected MonsterAnimationController _animController;
 
     private IAimComponent _aimingComponent;
-    private QuadWeapon _weaponSource;
+    private ProjectileWeapon _weaponSource;
 
     public IAimComponent AimingComponent => _aimingComponent;
 

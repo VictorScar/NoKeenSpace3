@@ -8,10 +8,10 @@ public class InputService : MonoBehaviour
     [SerializeField] private float _mouseSensity = 5f;
    
 
-    public event Action<Vector2> onMoveInput;
-    public event Action onJumpInput;
-    public event Action onUseItemInput;
-    public event Action onActionInput;
+    //public event Action<Vector2> onMoveInput;
+   // public event Action onJumpInput;
+   // public event Action onUseItemInput;
+   // public event Action onActionInput;
 
     //private void Update()
     //{

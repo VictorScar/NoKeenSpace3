@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuadWeapon : Weapon
+public class ProjectileWeapon : Weapon
 {    
     [SerializeField] protected Bullet _bulletPrefab;
 

@@ -10,7 +10,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private Transform _tower;
     [SerializeField] private Transform _muzzle;
 
-    [SerializeField] private float _checkAngle = 0.1f;
+    //[SerializeField] private float _checkAngle = 0.1f;
 
     private void Update()
     {
