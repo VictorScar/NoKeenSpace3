@@ -40,13 +40,13 @@ public class AIController : CommandController
         }
         else if (_shooter != null)
         {
-            var equipedItem = _pawn.Inventory.EquipedWeapon;
+            var equipedItem = _shooter.EquipedWeapon;
 
             if (equipedItem != null)
             {
                 requiredDistance = equipedItem.ShootingDistance - 0.5f;
             }
-            
+
 
             if (requiredDistance == 0)
             {
@@ -56,15 +56,14 @@ public class AIController : CommandController
 
         while (_pawn.IsAlive)
         {
-            if (_pawn.Target == null)
+            var target = _pawn.Target;
+            if (target == null)
             {
                 _pawn.FindTarget();
             }
-            else if(_pawn.Target.IsAlive)
+            else if (target.IsAlive)
             {
                 var distanceToTarget = Vector3.Distance(_pawn.Target.transform.position, _pawn.transform.position);
-
-                
 
                 if (distanceToTarget > requiredDistance)
                 {
@@ -74,61 +73,37 @@ public class AIController : CommandController
                 {
                     _pawn.StopMove();
 
+                    //if (AimAt(target))
+                    //{
+
+                    //}
+                    AimAt(target);
                     if (_meleeFighter != null)
                     {
                         _meleeFighter.Attacking();
                     }
                     else if (_shooter != null)
                     {
-                        var targetPosition = _pawn.Target.transform.position;
-                        var dir = targetPosition = (_pawn.transform .position).normalized;
-                        var angle = Vector3.Angle(dir, _pawn.transform.forward);
-                        var rotateDir = new Vector2(0, angle);
-                        _pawn.Rotate(rotateDir);
                         _shooter.Shoot();
                     }
+
+
+
                 }
-               
+
             }
             yield return null;
         }
     }
 
-    //private IEnumerator SearchingPlayer()
-    //{
-    //    if (_pawn == null)
-    //    {
-    //        yield break;
-    //    }
+    public bool AimAt(Character target)
+    {
+        //var aimPoint = target.transform.position + target.MoveDirection * target.MoveSpeed;
+        var aimPoint = target.transform.position;
+        return _pawn.LookAt(aimPoint);
+    }
 
-    //    while (_pawn.Target == null)
-    //    {
-    //        yield return new WaitForSeconds(0.5f);
-    //        _pawn.FindTarget();
-    //    }
-
-    //    StartCoroutine(ChaesingTarget());
-
-    //}
-
-    //private IEnumerator ChaesingTarget()
-    //{
-    //    var distanceToTarget = Vector3.Distance(_pawn.Target.transform.position, _pawn.transform.position);
-    //    var requiredDistance = 0f;
-
-    //    if(_meleeFighter != null) 
-    //    {
-    //        requiredDistance = _meleeFighter.MeleeAttackDistance;
-    //    }
-
-
-
-    //    while (_pawn.Target != null && distanceToTarget > requiredDistance)
-    //    {
-    //        _pawn.GoToTarget();
-    //        yield return null;
-    //    }
-    //}
+ 
 
     public override void SetPawn(Character pawn)
     {

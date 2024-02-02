@@ -6,17 +6,22 @@ public class ShootingMonster : NPC_Character, ICanShoot
 {
     [SerializeField] protected float _shootDistance = 10f;
 
+   // [SerializeField] protected MonsterAnimationController _animController;
+
     private IAimComponent _aimingComponent;
-    private QuadWeapon _weaponSource;
+    private ProjectileWeapon _weaponSource;
 
     public IAimComponent AimingComponent => _aimingComponent;
+
+    public Weapon EquipedWeapon => _weaponSource;
 
     public override void Init()
     {
         base.Init();
         _aimingComponent = GetComponent<IAimComponent>();
 
-        _inventory.Init(this);
+        _inventory?.Init(this);
+        _animController?.Init(this);
 
     }
 
@@ -35,23 +40,7 @@ public class ShootingMonster : NPC_Character, ICanShoot
         }
 
         equipedWeapon.Fire();
+        OnAttacking();
         return true;
     }
-
-    //public void UseEquipedTool()
-    //{
-    //    if (AimingComponent == null)
-    //    {
-    //        return;
-    //    }
-
-    //    var equipedWeapon = _inventory.EquipedWeapon;
-
-    //    if (equipedWeapon == null)
-    //    {
-    //        return;
-    //    }
-
-    //    equipedWeapon.Fire();
-    //}
 }

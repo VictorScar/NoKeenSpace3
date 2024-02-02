@@ -31,25 +31,20 @@ public class PlayerMover : CharacterMover
         _charController.enabled = false;
     }
 
-    public override void Move(Vector2 dir, float moveSpeed)
+    public void Move(Vector2 dir, float moveSpeed)
     {
         if (dir == Vector2.zero)
         {
-            _isMoving = false;
+            IsMoving = false;
             _inputDirection = Vector3.zero;
             return;
         }
 
-        _isMoving = true;
-
+        IsMoving = true;
         _inputDirection = (transform.forward * dir.y + transform.right * dir.x) * moveSpeed;
-        //_charController.Move(moveDirection - (transform.up* GravityForce) * moveSpeed * Time.deltaTime);
-    }
-
-    public override void MoveTo(Vector3 targetPos, float moveSpeed)
-    {
 
     }
+
 
     public override void Jump()
     {
@@ -100,7 +95,7 @@ public class PlayerMover : CharacterMover
 
     }
 
-    public override void Rotate(float angle)
+    public void Rotate(float angle)
     {
         _deltaDirection = Quaternion.AngleAxis(angle, transform.up);
     }

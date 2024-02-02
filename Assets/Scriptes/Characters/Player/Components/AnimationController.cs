@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    [SerializeField] Animator _animator;
+    [SerializeField] protected Animator _animator;
+    protected int deathState = "Death".GetHashCode();
     private Character _pawn;
 
-    public void Init(Character pawn)
+    public virtual void Init(Character pawn)
     {
         _pawn = pawn;
 

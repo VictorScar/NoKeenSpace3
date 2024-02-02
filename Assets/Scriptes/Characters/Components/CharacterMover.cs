@@ -6,19 +6,27 @@ public abstract class CharacterMover : MonoBehaviour
 {
     protected Character _pawn;
 
+    protected Vector3 moveDirection;
     protected bool _isMoving;
+    
     public float GravityForce;
 
-    public bool IsMoving { get => _isMoving; }
-
+    public bool IsMoving
+    {
+        get => _isMoving; 
+        protected set
+        {
+            _isMoving = value;
+            _pawn.OnMoving(value);
+        }
+    }
+    public Vector3 MoveDirection { get => moveDirection; }
+   
     public virtual void Init(Character pawn)
     {
         _pawn = pawn;
     }
-
-    public abstract void Move(Vector2 dir, float moveSpeed);
-    public abstract void MoveTo(Vector3 targetPos, float moveSpeed);
-    public abstract void Rotate(float angle);
+    
     public abstract void Jump();
 
     public abstract void StopMoving();

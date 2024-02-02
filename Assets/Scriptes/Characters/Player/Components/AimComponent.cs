@@ -5,7 +5,7 @@ using UnityEngine;
 public class AimComponent : CharacterScanner, IAimComponent
 {
     [SerializeField] private Camera _camera;
-    [SerializeField] private float _defaultAimingRange = 100f;
+   // [SerializeField] private float _defaultAimingRange = 100f;
 
     private Vector2 _screenPoint;
     private Vector3 _aimPoint;

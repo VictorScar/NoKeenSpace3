@@ -8,7 +8,7 @@ public class NPC_Scanner : CharacterScanner
     [SerializeField] private float _searchingDistance = 20f;
     [SerializeField] private LayerMask layerMask;
 
-    public Player FindFlayer()
+    public Player FindPlayer()
     {
         var searchingDir = transform.forward;
         var searchCenterPoint = transform.position + searchingDir * _searchingDistance *0.5f;

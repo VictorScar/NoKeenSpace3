@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character, ICanShoot, ICanUseTools
+public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
 {
     [SerializeField] private CameraHolder _cameraHolder;
     
     [SerializeField] private HandsView _hands;
     [SerializeField] protected AnimationController _animController;
+
+    protected PlayerMover _playerMover;
     
     private IAimComponent _aimComponent;
 
@@ -29,6 +31,7 @@ public class Player : Character, ICanShoot, ICanUseTools
         _hands.Init(this, _aimComponent);
         _inventory.Init(this);
         _animController.Init(this);
+        _playerMover = _mover as PlayerMover;
     }
 
     public override bool IsSprinting
@@ -54,6 +57,10 @@ public class Player : Character, ICanShoot, ICanUseTools
 
     public CameraHolder CameraHolder { get => _cameraHolder; }
 
+    public Weapon EquipedWeapon => Inventory.EquipedWeapon;
+
+    public Tool EquipedTool => Inventory.EquipedTool;
+
     public void UseEquipedTool()
     {
         var tool = _inventory.EquipedTool;
@@ -66,9 +73,9 @@ public class Player : Character, ICanShoot, ICanUseTools
         tool.Use();
     }
 
-    public override void Rotate(Vector2 inputDirection)
+    public void Rotate(Vector2 inputDirection)
     {
-        _mover.Rotate(inputDirection.x);
+        _playerMover.Rotate(inputDirection.x);
         _cameraHolder.Incline(inputDirection.y);
     }
 
@@ -90,5 +97,15 @@ public class Player : Character, ICanShoot, ICanUseTools
             weapon.Fire();
             return true;
         }
+    }
+
+    public void DoAction()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Move(Vector2 inputDir)
+    {
+        _playerMover.Move(inputDir, _moveSpeed);
     }
 }

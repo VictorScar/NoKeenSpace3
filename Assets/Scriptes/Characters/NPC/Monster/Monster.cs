@@ -27,5 +27,6 @@ public class Monster : NPC_Character, IMeleeFighter
     public void Attacking()
     {
         _combatController.Attacking();
+        OnAttacking();
     }
 }
