@@ -5,7 +5,7 @@ using UnityEngine;
 public class NPC_Aiming : MonoBehaviour, IAimComponent
 {
     [SerializeField] private Transform _aimPoint;
-    public Vector3 AimPoint => throw new System.NotImplementedException();
+    public Vector3 AimPoint => _aimPoint.position;
 
     public Vector3 AimDirection => throw new System.NotImplementedException();
 

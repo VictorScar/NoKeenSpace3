@@ -5,15 +5,17 @@ using UnityEngine;
 public class ShootingMonster : NPC_Character, ICanShoot
 {
     [SerializeField] protected float _shootDistance = 10f;
-
-   // [SerializeField] protected MonsterAnimationController _animController;
+    [SerializeField] protected MonstrHandsView _handsView;
+    [SerializeField] private WeaponView[] _naturalWeapons; 
 
     private IAimComponent _aimingComponent;
-    private ProjectileWeapon _weaponSource;
+    //private WeaponView _weaponSource;
 
     public IAimComponent AimingComponent => _aimingComponent;
 
-    public Weapon EquipedWeapon => _weaponSource;
+    public WeaponView EquipedWeapon => _handsView.WeaponView;
+
+    public Character Character => this;
 
     public override void Init()
     {
@@ -22,6 +24,7 @@ public class ShootingMonster : NPC_Character, ICanShoot
 
         _inventory?.Init(this);
         _animController?.Init(this);
+        _handsView.Init(this, _naturalWeapons);
 
     }
 
@@ -32,14 +35,14 @@ public class ShootingMonster : NPC_Character, ICanShoot
             return false;
         }
 
-        var equipedWeapon = _inventory.EquipedWeapon;
+        //var equipedWeapon = _handView.EquipedWeapon;
 
-        if (equipedWeapon == null)
+        if (EquipedWeapon == null)
         {
             return false;
         }
 
-        equipedWeapon.Fire();
+        EquipedWeapon.Fire();
         OnAttacking();
         return true;
     }

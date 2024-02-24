@@ -4,17 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraHolder : MonoBehaviour
-{    
-    [SerializeField] private Camera _camera;
-    [SerializeField] private Transform _lookPoint;
-
+{
+    [SerializeField] private PointOfView _pointOfView;
     [SerializeField] private float maxLookAngle = 85f;
     [SerializeField] private float minLookAngle = -85f;
 
     [SerializeField] float xRotation = 0f;
-
-    public Transform LookPoint { get => _lookPoint; }
-    public Camera LookCamera { get => _camera; }
 
     public event Action onRotated;
 

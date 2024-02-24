@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface ICanUseTools : ICanAiming
-{
-    //public  Weapon EquipedWeapon { get; }
-    public  Tool EquipedTool { get; }
+{   
+    public  ToolView EquipedTool { get; }
     public void UseEquipedTool();
 }

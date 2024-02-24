@@ -7,7 +7,7 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
 {
     [SerializeField] private CameraHolder _cameraHolder;
     
-    [SerializeField] private HandsView _hands;
+    [SerializeField] private PlayerHandsView _hands;
     [SerializeField] protected AnimationController _animController;
 
     protected PlayerMover _playerMover;
@@ -28,7 +28,7 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
         base.Init();
         _aimComponent = _scanner.GetComponent<IAimComponent>();
         _aimComponent.Init();
-        _hands.Init(this, _aimComponent);
+        _hands.Init(this);
         _inventory.Init(this);
         _animController.Init(this);
         _playerMover = _mover as PlayerMover;
@@ -57,24 +57,31 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
 
     public CameraHolder CameraHolder { get => _cameraHolder; }
 
-    public Weapon EquipedWeapon => Inventory.EquipedWeapon;
+    public WeaponView EquipedWeapon => _hands.WeaponView;
 
-    public Tool EquipedTool => Inventory.EquipedTool;
+    public ToolView EquipedTool => _hands.ToolView;
+
+    public Character Character => this;
 
     public void UseEquipedTool()
     {
-        var tool = _inventory.EquipedTool;
+        var item = _inventory.EquipedItem;
 
-        if (tool == null)
+        if (item == null)
         {
             return;
         }
 
-        tool.Use();
+        item.Use(this);
     }
 
     public void Rotate(Vector2 inputDirection)
     {
+        if (_playerMover == null)
+        {
+            return;
+        }
+
         _playerMover.Rotate(inputDirection.x);
         _cameraHolder.Incline(inputDirection.y);
     }
@@ -86,15 +93,14 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
 
     public bool Shoot()
     {
-        var weapon = _inventory.EquipedWeapon;
-
-        if (weapon == null)
+       
+        if (EquipedWeapon == null)
         {
             return false;
         }
         else
         {
-            weapon.Fire();
+            EquipedWeapon.Fire();
             return true;
         }
     }
@@ -106,6 +112,11 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
 
     public void Move(Vector2 inputDir)
     {
+        if (_playerMover == null)
+        {
+            return;
+        }
+
         _playerMover.Move(inputDir, _moveSpeed);
     }
 }

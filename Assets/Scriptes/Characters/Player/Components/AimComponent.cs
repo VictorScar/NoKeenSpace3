@@ -9,6 +9,7 @@ public class AimComponent : CharacterScanner, IAimComponent
 
     private Vector2 _screenPoint;
     private Vector3 _aimPoint;
+    
 
     public Vector3 AimPoint { get => _aimPoint; }
     public Vector3 AimDirection { get => transform.forward; }
@@ -19,20 +20,22 @@ public class AimComponent : CharacterScanner, IAimComponent
         _aimPoint = _camera.ScreenToWorldPoint(_screenPoint);
     }
 
-    public object ThrowBeam(float distance, out Vector3 impactPoint)
+    public object ThrowBeam(float distance, out Vector3 hitPoint)
     {
         _screenPoint = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-        var ray = _camera.ScreenPointToRay(_screenPoint);
+        _aimPoint = _camera.ScreenToWorldPoint(_screenPoint);
+        //var ray = _camera.ScreenPointToRay(_screenPoint);
+        var ray = new Ray(_aimPoint, _camera.transform.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hit, distance))
         {
-            Debug.Log("DF");
-            impactPoint = hit.point;
+            Debug.DrawLine(_aimPoint, _aimPoint + _camera.transform.forward * distance, Color.red, 5f);
+            hitPoint = hit.point;
             return hit.collider.gameObject;
         }
         else
         {
-            impactPoint = ray.origin + ray.direction * distance;
+            hitPoint = ray.origin + ray.direction * distance;
             return null;
         }
     }

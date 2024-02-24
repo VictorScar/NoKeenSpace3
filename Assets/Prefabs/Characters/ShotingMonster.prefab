@@ -272,6 +272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5259390203495316190}
+  - component: {fileID: 8097097819401476830}
   m_Layer: 0
   m_Name: Hands
   m_TagString: Untagged
@@ -299,6 +300,18 @@ Transform:
   - {fileID: 803769235354198421}
   m_Father: {fileID: 6275751689539044416}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8097097819401476830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807088935132747754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d816954535e2d2640ac679b97650e46e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3413471828770677614
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,14 +688,18 @@ MonoBehaviour:
   _maxHealth: 100
   _baseSpeed: 5
   _sprintSpeed: 8
+  _removeDeadBodyTime: 15
   _mover: {fileID: 471594912098324959}
   _scanner: {fileID: 192358519030164322}
   _inventory: {fileID: 835818268318280561}
   isImmortal: 0
   _target: {fileID: 0}
   _lookPoint: {fileID: 6682929142944414444}
-  _shootDistance: 10
   _animController: {fileID: 3551337224157815170}
+  _shootDistance: 10
+  _handsView: {fileID: 8097097819401476830}
+  _naturalWeapons:
+  - {fileID: 5292449212346256390, guid: ab588a46a4857d94485e13917f87b3af, type: 3}
 --- !u!114 &471594912098324959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,7 +763,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96251580e0dd3d544ad6df86dca006dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startWepon: {fileID: 6135123146648811036}
+  _startItems: []
+  _inventorySize: 0
+  EquipedItem: {fileID: 0}
+  _canEquipedItems: []
 --- !u!114 &546646716785392368
 MonoBehaviour:
   m_ObjectHideFlags: 0

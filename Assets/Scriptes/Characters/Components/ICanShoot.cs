@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface ICanShoot: ICanAiming
 {
-    public Weapon EquipedWeapon { get; }
+    public WeaponView EquipedWeapon { get; }
     public bool Shoot();
 }

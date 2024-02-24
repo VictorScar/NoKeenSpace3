@@ -15,8 +15,8 @@ public class Aim : MonoBehaviour
     private void Start()
     {
         _cameraHolder = _pawn.CameraHolder;
-        _lockPoint = _cameraHolder.LookPoint;
-        _camera = _cameraHolder.LookCamera;
+        //_lockPoint = _cameraHolder.LookPoint;
+       // _camera = _cameraHolder.LookCamera;
         //_cameraHolder.onRotated += AimSetPosition;
     }
 

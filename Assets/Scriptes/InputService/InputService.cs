@@ -77,4 +77,9 @@ public class InputService : MonoBehaviour
     {
         return Input.GetMouseButton(0);
     }
+
+    public bool OnAlternativeMouseClick()
+    {
+        return Input.GetMouseButton(1);
+    }
 }

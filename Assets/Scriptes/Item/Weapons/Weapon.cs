@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
+using UnityEngine.UI;
 
-public abstract class Weapon : Item, IEquipped, IDirectedTool
+public class Weapon : Item, IEquipped, IDirectedTool
 {
     [SerializeField] protected Transform _muzzle;
+    [SerializeField] protected WeaponView _weaponView;
+
     [SerializeField] protected float _rateOfTime = 0.5f;
     [SerializeField] protected float _shootingDistance = 20f;
 
@@ -27,11 +29,10 @@ public abstract class Weapon : Item, IEquipped, IDirectedTool
         IsEquiped = true;
     }
 
-    //public virtual void Init(Character owner)
-    //{
-    //    _shooter = owner as ICanAiming;
-    //    IsEquiped = true;
-    //}
+    public Weapon(string name, string description, Image icon, int id, WeaponView weaponView): base(name, description, icon, id)
+    {
+        _weaponView = weaponView;
+    }
 
     public virtual void Fire()
     {
@@ -55,6 +56,18 @@ public abstract class Weapon : Item, IEquipped, IDirectedTool
         _lastShootTime = Time.time;
     }
 
-    protected abstract void Shoot(Vector3 shoorDirection);
+    protected virtual void Shoot(Vector3 shoorDirection)
+    {
+        _weaponView.Fire();
+    }
 
+    public override void Use()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnRemove()
+    {
+        Object.Destroy(_weaponView);
+    }
 }

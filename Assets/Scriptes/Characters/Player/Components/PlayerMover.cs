@@ -66,6 +66,7 @@ public class PlayerMover : CharacterMover
             GravityForce = 0;
         }
 
+        _moveDirection = _inputDirection;
         _charController.Move((_inputDirection - (Vector3.up * GravityForce)) * Time.deltaTime);
         transform.rotation *= _deltaDirection;
     }
