@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -21,13 +19,17 @@ public class HandsView : MonoBehaviour
     public WeaponView WeaponView { get => _weaponView; }
     public ToolView ToolView { get => _toolView; }
 
-    public virtual void Init(ICanAiming aimAgent)
+    public virtual void Init(Character pawn)
     {
-        _aimAgent = aimAgent;
-        _owner = _aimAgent.Character;
-        _aimComponent = _aimAgent.AimingComponent;
+        _aimAgent = pawn as ICanShoot;
+        _owner = pawn;
         _inventory = _owner.Inventory;
 
+        if (_aimAgent != null)
+        {
+            _aimComponent = _aimAgent.AimingComponent;
+        }
+        
         _inventory.onNewItemEqiuped += ShowEquipedTool;
         ShowEquipedTool();
     }
@@ -63,7 +65,7 @@ public class HandsView : MonoBehaviour
             if (view is WeaponView weaponView)
             {
                 _weaponView = view;
-                _weaponView.Init(_aimAgent, this);
+                _weaponView.Init(_owner, this);
             }
         }
     }

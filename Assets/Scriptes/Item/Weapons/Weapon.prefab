@@ -49,6 +49,7 @@ MonoBehaviour:
   _muzzle: {fileID: 2691347348339982679}
   _rateOfTime: 0.5
   _shootingDistance: 20
+  weaponType: 2
   _bulletPrefab: {fileID: 443797021330377305, guid: 5c36414f5976be34f9569f247d4bf3de, type: 3}
 --- !u!1 &7744224153556421276
 GameObject:

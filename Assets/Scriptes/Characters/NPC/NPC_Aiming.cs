@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC_Aiming : MonoBehaviour, IAimComponent
+public class NPC_Aiming : AimComponentBase
 {
     [SerializeField] private Transform _aimPoint;
-    public Vector3 AimPoint => _aimPoint.position;
 
-    public Vector3 AimDirection => throw new System.NotImplementedException();
+    public override Vector3 AimPoint => _aimPoint.position;
 
-    public void Init()
+    public override Vector3 AimDirection => throw new System.NotImplementedException();
+
+    public override void Init()
     {
         throw new System.NotImplementedException();
     }
 
-    public object ThrowBeam(float distance, out Vector3 impactPoint)
+    public override object ThrowBeam(float distance, out Vector3 impactPoint)
     {
         var aimPosition = _aimPoint.position;
         var ray = new Ray(aimPosition, transform.forward);

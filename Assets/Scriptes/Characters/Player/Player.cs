@@ -10,12 +10,9 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
 
     protected CharacterInventory _characterInventory;
     protected PlayerMover _playerMover;
-    
-    private IAimComponent _aimComponent;
-
+        
     private bool _isSprinting = false;
-
-    public IAimComponent AimingComponent => _aimComponent;
+       
 
     private void Start()
     {
@@ -25,8 +22,8 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
     public override void Init()
     {
         base.Init();
-        _aimComponent = _scanner.GetComponent<IAimComponent>();
-        _aimComponent.Init();
+        //_aimComponent = _scanner.GetComponent<IAimComponent>();
+        _aimingComponent.Init();
         _hands.Init(this);
         _inventory.Init(this);
         _animController.Init(this);

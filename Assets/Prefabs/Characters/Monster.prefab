@@ -32,6 +32,7 @@ Transform:
   m_Children:
   - {fileID: 4280662103976297949}
   - {fileID: 1510861871371355545}
+  - {fileID: 1793411890444847560}
   m_Father: {fileID: 8870324932469083831}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5484028419988705567
@@ -96,6 +97,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotateSpeed: 10
   _minRequiredAngle: 0.1
+--- !u!1 &3527541531651994578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1793411890444847560}
+  m_Layer: 0
+  m_Name: AimPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1793411890444847560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527541531651994578}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.41}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8808768708113209349}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4228853835069440045
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +251,7 @@ GameObject:
   - component: {fileID: 7873890697213104432}
   - component: {fileID: 3834457340769167419}
   - component: {fileID: 3447245990632058019}
+  - component: {fileID: 3237548807387123542}
   m_Layer: 11
   m_Name: Monster
   m_TagString: Untagged
@@ -261,12 +294,14 @@ MonoBehaviour:
   _sprintSpeed: 10
   _removeDeadBodyTime: 15
   _mover: {fileID: 1713020487879254430}
-  _scanner: {fileID: 5484028419988705567}
   _inventory: {fileID: 3447245990632058019}
+  _handsView: {fileID: 3834457340769167419}
   isImmortal: 0
+  _aimingComponent: {fileID: 3237548807387123542}
   _target: {fileID: 0}
   _lookPoint: {fileID: 7428491053978528437}
   _animController: {fileID: 7873890697213104432}
+  _npcScanner: {fileID: 5484028419988705567}
   _meleeDamage: 20
   _attackDistance: 2
   _attackPeriod: 1
@@ -399,7 +434,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _equipedItem: {fileID: 0}
   _inventoryCells: []
-  _naturalWeapon: []
+  _naturalWeapon:
+  - {fileID: 11400000, guid: 950dcebaa23c9124cad501c5c14d9118, type: 2}
+--- !u!114 &3237548807387123542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6461612332943359395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49cf60da41832e44a9933b5e0b0a5040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aimPoint: {fileID: 1793411890444847560}
 --- !u!1 &7369745184282575887
 GameObject:
   m_ObjectHideFlags: 0

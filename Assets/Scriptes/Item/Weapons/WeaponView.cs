@@ -7,10 +7,13 @@ public abstract class WeaponView : ItemView
     [SerializeField] protected Transform _muzzle;
     [SerializeField] protected float _rateOfTime = 0.5f;
     [SerializeField] protected float _shootingDistance = 20f;
+    [SerializeField] protected WeaponType weaponType;
 
     protected float _lastShootTime = 0f;
 
     public float ShootingDistance => _shootingDistance;
+
+    public WeaponType WeaponType { get => weaponType; }
 
     public virtual void Fire()
     {

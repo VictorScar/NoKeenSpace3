@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeMonster : NPC_Character, IMeleeFighter
+public class MeleeMonster : Monster, IMeleeFighter
 {
     [SerializeField] private float _meleeDamage = 20f;
     [SerializeField] private float _attackDistance = 1f;
@@ -26,7 +26,30 @@ public class MeleeMonster : NPC_Character, IMeleeFighter
 
     public void Attacking()
     {
-        _combatController.Attacking();
-        OnAttacking();
+        //_combatController.Attacking();
+        var weapon = _handsView.WeaponView;
+
+        if (weapon == null)
+        {
+            return;
+        }
+
+        if (weapon.WeaponType != WeaponType.Melee)
+        {
+            foreach (var naturalWeapon in _monsterInventory.NaturalWeaponsPrefabs)
+            {
+                if (naturalWeapon.ItemView.WeaponType == WeaponType.Melee)
+                {
+                    _inventory.EquipItem(naturalWeapon);
+                }
+            }
+        }
+        else
+        {
+            _handsView.WeaponView.Fire();
+            OnAttacking();
+        }
+
+        
     }
 }

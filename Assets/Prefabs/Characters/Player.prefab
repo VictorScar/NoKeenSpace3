@@ -132,7 +132,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -882,15 +882,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30533d1244ed5744db335bcb42603da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
-  _maxHealth: 100
+  _health: 300
+  _maxHealth: 300
   _baseSpeed: 5
   _sprintSpeed: 10
   _removeDeadBodyTime: 15
   _mover: {fileID: 7444443399651280646}
-  _scanner: {fileID: 1497487736735503374}
   _inventory: {fileID: 8198992946643008714}
+  _handsView: {fileID: 0}
   isImmortal: 0
+  _aimingComponent: {fileID: 1497487736735503374}
   _cameraHolder: {fileID: 8622541978688349950}
   _hands: {fileID: 6549190876993599342}
   _animController: {fileID: 2920281588224818461}
@@ -1010,11 +1011,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96251580e0dd3d544ad6df86dca006dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _equipedItem: {fileID: 0}
+  _inventoryCells: []
   _startItems:
   - Item: {fileID: 11400000, guid: e1313173f6c8fe540b940df5463eb691, type: 2}
     Count: 1
   _inventorySize: 30
-  EquipedItem: {fileID: 0}
   _canEquipedItems: []
 --- !u!114 &1497487736735503374
 MonoBehaviour:
@@ -1049,7 +1051,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -1222,6 +1224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559608d0d3c9d7b47a0badb74d49fc88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _leftWrist: {fileID: 0}
+  _rightWrist: {fileID: 0}
+  _chest: {fileID: 0}
   _rotateConstraint: {fileID: 0}
 --- !u!895512359 &8302359456687696395
 AimConstraint:

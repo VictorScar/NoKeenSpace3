@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour, ITakeDamage
+public abstract class Character : MonoBehaviour, ITakeDamage, ICanAiming
 {
     [SerializeField] protected float _health;
     [SerializeField] protected float _maxHealth;
@@ -13,11 +13,12 @@ public abstract class Character : MonoBehaviour, ITakeDamage
     [SerializeField] protected float _removeDeadBodyTime = 15f;
 
     [SerializeField] protected CharacterMover _mover;
-    [SerializeField] protected CharacterScanner _scanner;
+   
     [SerializeField] protected InventoryBase _inventory;
-
+    [SerializeField] protected HandsView _handsView;
 
     [SerializeField] protected bool isImmortal = false;
+    [SerializeField] protected AimComponentBase _aimingComponent;
 
     protected bool isAlive = true;
 
@@ -29,6 +30,10 @@ public abstract class Character : MonoBehaviour, ITakeDamage
 
     public float MoveSpeed { get => _moveSpeed; }
     public Vector3 MoveDirection { get => _mover.MoveDirection; }
+
+    public IAimComponent AimingComponent => _aimingComponent;
+
+    Character ICanAiming.Character => this;
 
     public event Action<bool> onMoving;
     public event Action onDied;

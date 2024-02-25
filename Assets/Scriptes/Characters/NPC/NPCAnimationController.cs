@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterAnimationController : AnimationController
+public class NPCAnimationController : AnimationController
 {
     private NPC_Character _npcPawn;
 

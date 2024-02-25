@@ -7,24 +7,48 @@ public class NPC_Character : Character
 
     [SerializeField] protected NPC_LookPoint _lookPoint;
 
-    [SerializeField] protected MonsterAnimationController _animController;
-    protected NPC_Scanner _npcScanner;
+    //[SerializeField] protected HandsView _handsView;
+
+    [SerializeField] protected NPCAnimationController _animController;
+    [SerializeField] protected NPC_Scanner _npcScanner;
+
     protected NPC_Mover _npcMover;
-
-
+    protected bool _isSprinting = false;
 
     public Action onAttacking;
 
     public override void Init()
     {
         base.Init();
-        _npcScanner = _scanner as NPC_Scanner;
+        
         _npcMover = _mover as NPC_Mover;
+        _handsView.Init(this);
         _animController?.Init(this);
     }
 
     public Player Target { get => _target; set => _target = value; }
-    public override bool IsSprinting { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    public override bool IsSprinting
+    {
+        get
+        {
+            return _isSprinting;
+        }
+        set
+        {
+            _isSprinting = value;
+
+            if (_isSprinting)
+            {
+                _moveSpeed = _sprintSpeed;
+            }
+            else
+            {
+                _moveSpeed = _baseSpeed;
+            }
+        }
+    }
+
     public NPC_LookPoint LookPoint { get => _lookPoint; }
 
     public void FindTarget()
@@ -65,8 +89,7 @@ public class NPC_Character : Character
     }
 
     public bool TurnTo(Vector3 dirTo)
-    {
-        //var dirTo = (targetPos - transform.position).normalized;
+    {       
         return _npcMover.TurnTo(dirTo);
     }
 

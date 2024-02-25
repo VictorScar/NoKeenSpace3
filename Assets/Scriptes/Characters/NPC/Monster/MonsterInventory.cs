@@ -27,6 +27,11 @@ public class MonsterInventory : InventoryBase
     {
         base.Init(owner);
 
-        _equipedItem = _naturalWeapon[0];
+        if (_naturalWeapon != null && _naturalWeapon.Length > 0)
+        {
+            EquipItem(_naturalWeapon[0]);
+        }
+       
+        // _equipedItem = _naturalWeapon[0];
     }
 }
