@@ -3,30 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MonstrHandsView : HandsView
-{
-    private WeaponView[] _naturalWeapons;
+{   
+   //protected MonsterInventory _inventory;
+   
+    //public void Init(ICanShoot shooter)
+    //{
+    //    base.Init(shooter);
 
-    public void Init(ICanShoot shooter, WeaponView[] naturalWeponsPrefabs)
-    {
-        base.Init(shooter);
+    //    //_inventory = _owner.Inventory as MonsterInventory;
 
-        var weponPrefabsLenght = naturalWeponsPrefabs.Length;
+    //    _inventory.onNewItemEqiuped += ShowEquipedTool;
+    //    ShowEquipedTool();
+    //}
 
-        _naturalWeapons = new WeaponView[weponPrefabsLenght];
 
-        for (int i = 0; i < weponPrefabsLenght; i++)
-        {            
-            var instance = Instantiate(naturalWeponsPrefabs[i], transform);
-            _naturalWeapons[i] = instance;
-        }
-
-        _weaponView = _naturalWeapons[0];
-        _weaponView.Init(_aimAgent, this);
-      
-    }
-
-    public void SetActiveWeapon(int weaponIndex)
-    {
-        _weaponView = _naturalWeapons[weaponIndex];
-    }
+    //private void OnDestroy()
+    //{
+    //    if (_inventory != null)
+    //    {
+    //        _inventory.onNewItemEqiuped -= ShowEquipedTool;
+    //    }
+    //}
 }

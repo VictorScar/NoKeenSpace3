@@ -217,6 +217,8 @@ GameObject:
   - component: {fileID: 5318386322377870358}
   - component: {fileID: 4792949289346731836}
   - component: {fileID: 7873890697213104432}
+  - component: {fileID: 3834457340769167419}
+  - component: {fileID: 3447245990632058019}
   m_Layer: 11
   m_Name: Monster
   m_TagString: Untagged
@@ -260,7 +262,7 @@ MonoBehaviour:
   _removeDeadBodyTime: 15
   _mover: {fileID: 1713020487879254430}
   _scanner: {fileID: 5484028419988705567}
-  _inventory: {fileID: 0}
+  _inventory: {fileID: 3447245990632058019}
   isImmortal: 0
   _target: {fileID: 0}
   _lookPoint: {fileID: 7428491053978528437}
@@ -368,6 +370,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8692608239732427138}
+--- !u!114 &3834457340769167419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6461612332943359395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d816954535e2d2640ac679b97650e46e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _leftWrist: {fileID: 0}
+  _rightWrist: {fileID: 0}
+  _chest: {fileID: 0}
+--- !u!114 &3447245990632058019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6461612332943359395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6611b83b0c044e46aa761654aebc089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _equipedItem: {fileID: 0}
+  _inventoryCells: []
+  _naturalWeapon: []
 --- !u!1 &7369745184282575887
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
@@ -10,6 +8,7 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
     [SerializeField] private PlayerHandsView _hands;
     [SerializeField] protected AnimationController _animController;
 
+    protected CharacterInventory _characterInventory;
     protected PlayerMover _playerMover;
     
     private IAimComponent _aimComponent;
@@ -32,6 +31,8 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
         _inventory.Init(this);
         _animController.Init(this);
         _playerMover = _mover as PlayerMover;
+
+        _characterInventory = _inventory as CharacterInventory;
     }
 
     public override bool IsSprinting
@@ -65,7 +66,13 @@ public class Player : Character, ICanShoot, ICanUseTools, IPlayerControlable
 
     public void UseEquipedTool()
     {
-        var item = _inventory.EquipedItem;
+        if (_characterInventory == null)
+        {
+            Debug.LogError("Have not CharacterInventory component");
+            return;
+        }
+
+        var item = _characterInventory.EquipedItem;
 
         if (item == null)
         {

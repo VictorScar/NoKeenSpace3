@@ -5,12 +5,11 @@ using UnityEngine;
 public class ShootingMonster : NPC_Character, ICanShoot
 {
     [SerializeField] protected float _shootDistance = 10f;
-    [SerializeField] protected MonstrHandsView _handsView;
+    
     [SerializeField] private WeaponView[] _naturalWeapons; 
 
     private IAimComponent _aimingComponent;
-    //private WeaponView _weaponSource;
-
+   
     public IAimComponent AimingComponent => _aimingComponent;
 
     public WeaponView EquipedWeapon => _handsView.WeaponView;
@@ -24,7 +23,7 @@ public class ShootingMonster : NPC_Character, ICanShoot
 
         _inventory?.Init(this);
         _animController?.Init(this);
-        _handsView.Init(this, _naturalWeapons);
+        _handsView.Init(this);
 
     }
 

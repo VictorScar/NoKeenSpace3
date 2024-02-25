@@ -9,23 +9,16 @@ public class PlayerHandsView : HandsView
     [SerializeField] RotationConstraint _rotateConstraint;
 
     //private IAimComponent _aimComponent;
-    private CharacterInventory _inventory;
-    //private Character _owner;
+   // private CharacterInventory _inventory;
 
-    //private WeaponView _weaponView;
-    //private ToolView _toolView;
+    //public override void Init(ICanAiming aimAgent)
+    //{
+    //    base.Init(aimAgent);
 
-    //public WeaponView WeaponView { get => _weaponView; }
-    //public ToolView ToolView { get => _toolView; }
+    //    //_inventory = _owner.Inventory as CharacterInventory;
 
-    public override void Init(ICanAiming aimAgent)
-    {
-        base.Init(aimAgent);
-
-        _inventory = _owner.Inventory;
-
-        _inventory.onNewItemEqiuped += ShowEquipedTool;
-    }
+    //    //_inventory.onNewItemEqiuped += ShowEquipedTool;
+    //}
 
     //private void Orient()
     //{
@@ -50,36 +43,4 @@ public class PlayerHandsView : HandsView
     //}
 
 
-    public void ShowEquipedTool()
-    {
-        var viewPrefab = _inventory.EquipedItem.ItemView;
-
-        if (viewPrefab == _weaponView)
-        {
-            return;
-        }
-
-        Destroy(_weaponView);
-
-        if (viewPrefab == null)
-        {
-            return;
-        }
-
-        var view = Instantiate(viewPrefab, transform);
-
-        if (view is WeaponView weaponView)
-        {
-            _weaponView = view;
-            _weaponView.Init(_aimAgent, this);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (_inventory != null)
-        {
-            _inventory.onNewItemEqiuped -= ShowEquipedTool;
-        }
-    }
 }

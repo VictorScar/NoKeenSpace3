@@ -14,7 +14,7 @@ public abstract class Character : MonoBehaviour, ITakeDamage
 
     [SerializeField] protected CharacterMover _mover;
     [SerializeField] protected CharacterScanner _scanner;
-    [SerializeField] protected CharacterInventory _inventory;
+    [SerializeField] protected InventoryBase _inventory;
 
 
     [SerializeField] protected bool isImmortal = false;
@@ -25,7 +25,7 @@ public abstract class Character : MonoBehaviour, ITakeDamage
     protected float Health { get => _health; }
     public bool IsAlive { get => isAlive; set => isAlive = value; }
     public abstract bool IsSprinting { get; set; }
-    public CharacterInventory Inventory { get => _inventory; }
+    public InventoryBase Inventory { get => _inventory; }
 
     public float MoveSpeed { get => _moveSpeed; }
     public Vector3 MoveDirection { get => _mover.MoveDirection; }
